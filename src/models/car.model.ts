@@ -8,6 +8,9 @@ export class Car {
         make: { type: String, maxlength: 24 },
         model: { type: String, maxlength: 24 },
         year: { type: String, maxlength: 24 },
+        color: { type: String, maxlength: 24 },
+        mileage: { type: String, maxlength: 24 },
+        image_url: { type: String, maxlength: 1000 },
         user_id: {
           type: Number,
           key: 'foreign',
@@ -27,10 +30,48 @@ export class Car {
             method: 'POST',
             callback: this.getCarById,
             requireToken: true,
-        }
+        },
+        {
+          route:'/create-car',
+          method: 'POST',
+          callback: this.createCar,
+          requireToken: true,
+      },
+      {
+        route:'/update-car/id/:id',
+        method: 'PUT',
+        callback: this.updateCar,
+        requireToken: true,
+    },
+    {
+        route:'/delete/id/:id',
+        method: 'DELETE',
+        callback: this.deleteCar,
+        requireToken: true,
+    }
       ]];
     }
-    
+    deleteCar(model:any){
+        return async (req: Request, res: Response, next: NextFunction) => {
+            let carCtrl = model.controller;
+            let resp = await carCtrl.remove(req, null, null);
+            res.json({ message: 'Success' , resp});
+        }
+    }
+    updateCar(model:any){
+        return async (req: Request, res: Response, next: NextFunction) => {
+            let carCtrl = model.controller;
+            let resp = await carCtrl.update(req, null, null);
+            res.json({ message: 'Success' , resp});
+        }
+    }
+    createCar(model:any){
+        return async (req: Request, res: Response, next: NextFunction) => {
+            let carCtrl = model.controller;
+            let resp = await carCtrl.insert(req, null, null);
+            res.json({ message: 'Success' , resp});
+        }
+    }
     getCarById(model:any){
         return async (req: Request, res: Response, next: NextFunction) => {
             req.body = {
@@ -41,7 +82,6 @@ export class Car {
             }
             let carCtrl = model.controller;
             let resp = await carCtrl.get(req, null, null);
-            console.log('from car model resp: '. resp);
             res.json({ message: 'Success' , resp});
         }
     }
@@ -52,7 +92,6 @@ export class Car {
             }
             let carCtrl = model.controller;
             let resp = await carCtrl.get(req, null, null);
-            console.log('from car model resp: '. resp);
             res.json({ message: 'Success' , resp});
         }
     }
