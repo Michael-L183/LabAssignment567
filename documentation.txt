@@ -1,0 +1,65 @@
+Description: Get all the cars from the database
+Endpoint:http://localhost:3000/api/v1/car/get-all-cars
+Method: POST
+Params: none
+Request Payload: none
+Response:{
+id: 9
+make: ‘Toyota’,
+model: ‘Celica’,
+color: black,
+},{
+id:10
+make: ‘Nissan’,
+model: ‘350Z’
+color: black
+}
+Description: Get a car by its ID from the database
+Endpoint:http://localhost:3000/api/v1/car/get-car-by-id/:id
+Method: POST
+Params: id - the car id
+Request Payload: none
+Response:{
+id: 9
+make: ‘Nissan’,
+model: ‘350Z’
+color: black,
+}
+Description: Create a new car record
+Endpoint:http://localhost:3000/api/v1/car/create-car
+Method: POST
+Params: none
+Request Payload:{
+make: ‘UserInput/Tesla’,
+model: ‘UserInput/X’
+}
+Response:{
+id: 18
+make: ‘Tesla’,
+model: ‘X’
+}
+Description: Update a car record
+Endpoint:http://localhost:3000/api/v1/car/update-car/id/:id
+Method: PUT
+Params: id - the id of the car
+Request Payload:{
+make: ‘UserInput’,
+model: ‘UserInput’
+year: ‘UserInput’,
+mileage: ‘UserInput’,
+color: ‘UserInput
+}
+Response:{
+id: 21
+make: ‘Tesla’,
+model: ‘X’
+}
+Description: Delete a car record
+Endpoint:http://localhost:3000/api/v1/car/delete/id/:id
+Method: DELETE
+Params: id - The id of the car
+Request Payload: None
+Response:{
+Message: ‘Success’, resp
+}
+
